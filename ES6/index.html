@@ -3,16 +3,72 @@
 <head>
     <title>ES6 Demonstration</title>
     <style>
+        body { font-family: sans-serif; background-color: wheat;}
     paged-content { margin: 5px 10px; font-family: sans-serif; }
     ul { list-style-type: none; padding: 0; margin: 0; display: flex; gap: 0.5rem; }
     button { background: none; border: 0; padding: 0.5rem 1rem; }
     button:is(:active,:hover) { color: red; }
     [aria-current="true"] { font-weight: bold; color: red; }
     paged-content div { font-size: 250%; font-weight: 700; padding: 2rem 1rem; }
+    [data-component="popover"] { position: relative; }
+    [data-component="popover"] button{ 
+        position: relative;  z-index: 1;
+        background-color: white; border: 1px solid #ccc; padding: 0.5rem 1rem; cursor: pointer;
+    }
+
+    [data-component="popover"] > div { 
+    display: none; position: absolute; top: calc(100% + 4px); left: 0; background: white; border: 1px solid #ccc;
+    z-index: 1;
+ }
+    [data-component="popover"] > div ul { padding: 0.5rem; }
+    [data-component="popover"] > div button { display: block; margin: 0 auto; }
+    [data-component="popover"]:has([data-element="popover-trigger"][aria-expanded="true"]) {
+        > div {
+            display: block;
+            z-index: 1;
+        }
+        }
+        
+        [data-component="popover"]:has([data-element="popover-trigger"][aria-expanded="true"])::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 0;
+        
+    }
+
+
     </style>
     <script type="module" src="pages.mjs"></script>
 </head>
 <body>
-    <paged-content current-page="6" pages="9"></paged-content>
+    <div data-component="popover">
+        <button data-element="popover-trigger" aria-controls="id-123" type="button">Open popover</button>
+        <div id="id-123">
+            <ul>
+                <li>Option 1</li>
+                <li>Option 2</li>
+                <li>Option 3</li>
+            </ul>
+            <button type="button">Apply</button>
+        </div>
+    </div>
+
+    <div data-component="popover">
+        <button data-element="popover-trigger" aria-controls="id-123" type="button">Open popover</button>
+        <div id="id-123">
+            <ul>
+                <li>Option 1</li>
+                <li>Option 2</li>
+                <li>Option 3</li>
+            </ul>
+            <button type="button">Apply</button>
+        </div>
+    </div>
+    <!-- <paged-content current-page="6" pages="9"></paged-content> -->
 </body>
 </html>

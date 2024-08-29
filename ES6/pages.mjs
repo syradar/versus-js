@@ -69,3 +69,37 @@ class PagedContent extends HTMLElement {
 }
 
 customElements.define("paged-content", PagedContent);
+
+/* 
+<div data-component="popover">
+        <button data-element="popover-trigger" aria-controls="id-123" type="button">Open popover</button>
+        <div id="id-123">
+            <ul>
+                <li>Option 1</li>
+                <li>Option 2</li>
+                <li>Option 3</li>
+            </ul>
+            <button type="button">Apply</button>
+        </div>
+    </div>
+ */
+
+const popovers = document.querySelectorAll("[data-component=popover]");
+
+for (const popover of popovers) {
+	const trigger = popover.querySelector("[data-element=popover-trigger]");
+	const content = popover.querySelector("div");
+
+	trigger.addEventListener("click", () => {
+		const expanded = trigger.getAttribute("aria-expanded") === "true";
+		trigger.setAttribute("aria-expanded", !expanded);
+		content.hidden = expanded;
+	});
+
+	popover.addEventListener("click", (e) => {
+		if (e.target === popover) {
+			trigger.setAttribute("aria-expanded", false);
+			content.hidden = true;
+		}
+	});
+}
