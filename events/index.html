@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ES6 Demonstration</title>
+</head>
+<body>
+    <h1>✨CustomEventStore✨ 🔔</h1>
+
+    <p>
+        This app is built around a dynamic event-driven architecture that manages adding and removing rows from the DOM. It uses custom events and an event store to handle user interactions in a clean, modular way
+    </p>
+
+    <ul>
+        <li><strong>Event-Driven System 📡</strong>: The app relies on custom events to manage actions like adding, removing, and updating rows in the UI. These events are dispatched and handled using an EventStore, which tracks and logs all the actions in the app.</li>
+        <li><strong>Custom Actions 🎯</strong> <code>Action&lt;T&gt;</code>: Events are represented by "actions," which are objects that describe a specific event (e.g., row added, row removed) and a method to create the event with typed data. This allows for a flexible and reusable event system.</li>
+        <li><strong>Centralized Event Management 🗂️</strong>: The app maintains a single instance of EventStore, where all actions are dispatched and subscribed to, making it easy to track and manage state changes across the application.</li>
+    </ul>
+
+    <div style="display: flex; gap: 1rem;">
+        <button id="add-row">➕ Add row</button>
+        <button id="unsubscribe">🚫 Unsubscribe</button>
+        <button id="logging">📋 Toggle logging</button>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+
+        <div>
+            <h2>Rows</h2>
+            <div id="row-container" style="display: grid; grid-template-columns: 2fr 1fr; gap:0.5rem 1rem;">
+
+            </div>
+        </div>
+        
+        <div>
+            <h2>Actions</h2>
+            <div id="actions" style="display: flex; flex-direction: column; gap: 0.5rem;"></div>
+        </div>
+    </div>
+    <script type="module" src="main.mjs"></script>
+</body>
+</html>
